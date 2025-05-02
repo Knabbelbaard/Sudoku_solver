@@ -1,17 +1,3 @@
-# Define a partially filled Sudoku board
-sudoku_board = [
-    [0, 0, 0, 0, 7, 0, 5, 1, 0],
-    [0, 0, 7, 0, 0, 0, 0, 8, 2],
-    [0, 0, 0, 9, 2, 8, 0, 0, 0],
-    [0, 3, 0, 0, 0, 4, 0, 0, 0],
-    [7, 9, 0, 0, 0, 0, 0, 6, 1],
-    [0, 0, 0, 7, 0, 0, 0, 3, 0],
-    [0, 0, 0, 4, 6, 9, 0, 0, 0],
-    [2, 1, 0, 0, 0, 0, 8, 0, 0],
-    [0, 5, 6, 0, 1, 0, 0, 0, 0]
-]
-
-
 # Function to print the Sudoku board
 def print_sudoku_board(board):
     for i, row in enumerate(board):
@@ -23,8 +9,6 @@ def print_sudoku_board(board):
             print(value if value != 0 else ".", end=" ")
         print()  # Newline after each row
 
-# Example usage
-print_sudoku_board(sudoku_board)
 
 
 
@@ -33,10 +17,9 @@ def search_empty_location(board):
     for row in range(9):
         for col in range(9):
             if board[row][col] == 0:
-                return (col, row)
-    return None  # No empty location found
+                return (row, col)
+    return None
 
-print(search_empty_location(sudoku_board))
 
 
 
@@ -61,7 +44,6 @@ def check_validity_number(board, num, pos):
 
 
 
-
 def solve(board):
     find = search_empty_location(board)
     if not find:
@@ -79,3 +61,25 @@ def solve(board):
             board[row][col] = 0
 
     return False
+
+
+def main():
+    sudoku_board = [
+        [0, 0, 0, 0, 7, 0, 5, 1, 0],
+        [0, 0, 7, 0, 0, 0, 0, 8, 2],
+        [0, 0, 0, 9, 2, 8, 0, 0, 0],
+        [0, 3, 0, 0, 0, 4, 0, 0, 0],
+        [7, 9, 0, 0, 0, 0, 0, 6, 1],
+        [0, 0, 0, 7, 0, 0, 0, 3, 0],
+        [0, 0, 0, 4, 6, 9, 0, 0, 0],
+        [2, 1, 0, 0, 0, 0, 8, 0, 0],
+        [0, 5, 6, 0, 1, 0, 0, 0, 0]
+    ]
+
+    if solve(sudoku_board):
+        print_sudoku_board(sudoku_board)
+    else:
+        print("No solution exists")
+    
+if __name__ == "__main__":
+    main()
