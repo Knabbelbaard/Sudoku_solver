@@ -11,6 +11,7 @@ sudoku_board = [
     [0, 5, 6, 0, 1, 0, 0, 0, 0]
 ]
 
+
 # Function to print the Sudoku board
 def print_sudoku_board(board):
     for i, row in enumerate(board):
@@ -31,12 +32,9 @@ def search_empty_location(board):
     for row in range(9):
         for col in range(9):
             if board[row][col] == 0:
-                print({row}, {col})
                 return (col, row)
-                
-                     
     return None  # No empty location found
 
-# print(search_empty_location(sudoku_board))
-# # Function to check if a number can be placed in a given cell
-# print
+print(search_empty_location(sudoku_board))
+
+
