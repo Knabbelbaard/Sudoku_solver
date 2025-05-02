@@ -24,3 +24,19 @@ def print_sudoku_board(board):
 
 # Example usage
 print_sudoku_board(sudoku_board)
+
+
+# Function to find an empty location in the Sudoku board
+def search_empty_location(board):
+    for row in range(9):
+        for col in range(9):
+            if board[row][col] == 0:
+                print({row}, {col})
+                return (col, row)
+                
+                     
+    return None  # No empty location found
+
+# print(search_empty_location(sudoku_board))
+# # Function to check if a number can be placed in a given cell
+# print
