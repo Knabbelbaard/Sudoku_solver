@@ -1,13 +1,38 @@
+from flask import Flask, Response
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    sudoku_board = [
+        [0, 0, 0, 0, 7, 0, 5, 1, 0],
+        [0, 0, 7, 0, 0, 0, 0, 8, 2],
+        [0, 0, 0, 9, 2, 8, 0, 0, 0],
+        [0, 3, 0, 0, 0, 4, 0, 0, 0],
+        [7, 9, 0, 0, 0, 0, 0, 6, 1],
+        [0, 0, 0, 7, 0, 0, 0, 3, 0],
+        [0, 0, 0, 4, 6, 9, 0, 0, 0],
+        [2, 1, 0, 0, 0, 0, 8, 0, 0],
+        [0, 5, 6, 0, 1, 0, 0, 0, 0]
+    ]
+
+    if solve(sudoku_board):
+        return Response(print_sudoku_board(sudoku_board), mimetype='text/plain')
+    else:
+        return "No solution exists"
+
 # Function to print the Sudoku board
 def print_sudoku_board(board):
+    board_str = ""
     for i, row in enumerate(board):
         if i % 3 == 0 and i != 0:
-            print("-" * 21)  # Print horizontal separator every 3 rows
+            board_str += "-" * 21 + "\n"
         for j, value in enumerate(row):
             if j % 3 == 0 and j != 0:
-                print("| ", end="")  # Print vertical separator every 3 columns
-            print(value if value != 0 else ".", end=" ")
-        print()  # Newline after each row
+                board_str += "| "
+            board_str += str(value if value != 0 else ".") + " "
+        board_str += "\n"
+    return board_str
 
 
 
@@ -22,7 +47,7 @@ def search_empty_location(board):
 
 
 
-
+# Function to check if the new number is in a valid position
 def check_validity_number(board, num, pos):
     for i in range(len(board[0])):
         if board[pos[0]][i] == num and pos[1] != i:
@@ -43,7 +68,7 @@ def check_validity_number(board, num, pos):
     return True
 
 
-
+# Function to solve the empty positions on the board
 def solve(board):
     find = search_empty_location(board)
     if not find:
@@ -63,23 +88,6 @@ def solve(board):
     return False
 
 
-def main():
-    sudoku_board = [
-        [0, 0, 0, 0, 7, 0, 5, 1, 0],
-        [0, 0, 7, 0, 0, 0, 0, 8, 2],
-        [0, 0, 0, 9, 2, 8, 0, 0, 0],
-        [0, 3, 0, 0, 0, 4, 0, 0, 0],
-        [7, 9, 0, 0, 0, 0, 0, 6, 1],
-        [0, 0, 0, 7, 0, 0, 0, 3, 0],
-        [0, 0, 0, 4, 6, 9, 0, 0, 0],
-        [2, 1, 0, 0, 0, 0, 8, 0, 0],
-        [0, 5, 6, 0, 1, 0, 0, 0, 0]
-    ]
-
-    if solve(sudoku_board):
-        print_sudoku_board(sudoku_board)
-    else:
-        print("No solution exists")
     
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
