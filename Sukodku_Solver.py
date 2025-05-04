@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template
+from flask import Flask, render_template
 
 app = Flask(__name__)
     
@@ -22,11 +22,6 @@ def index():
         return "No solution exists"
     
 
-
-
-
-
-
 # Function to print the Sudoku board
 def print_sudoku_board(board):
     board_str = ""
@@ -41,8 +36,6 @@ def print_sudoku_board(board):
     return board_str
 
 
-
-
 # Function to find an empty location in the Sudoku board
 def search_empty_location(board):
     for row in range(9):
@@ -50,7 +43,6 @@ def search_empty_location(board):
             if board[row][col] == 0:
                 return (row, col)
     return None
-
 
 
 # Function to check if the new number is in a valid position
@@ -92,7 +84,6 @@ def solve(board):
             board[row][col] = 0
 
     return False
-
 
     
 if __name__ == "__main__":
