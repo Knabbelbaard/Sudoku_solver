@@ -1,6 +1,7 @@
-from flask import Flask, Response
+from flask import Flask, Response, render_template
 
 app = Flask(__name__)
+    
 
 @app.route('/')
 def index():
@@ -15,11 +16,16 @@ def index():
         [2, 1, 0, 0, 0, 0, 8, 0, 0],
         [0, 5, 6, 0, 1, 0, 0, 0, 0]
     ]
-
     if solve(sudoku_board):
-        return Response(print_sudoku_board(sudoku_board), mimetype='text/plain')
+        return render_template('index.html', board=print_sudoku_board(sudoku_board)) #Response(print_sudoku_board(sudoku_board), mimetype='text/plain')
     else:
         return "No solution exists"
+    
+
+
+
+
+
 
 # Function to print the Sudoku board
 def print_sudoku_board(board):
@@ -90,4 +96,4 @@ def solve(board):
 
     
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=80)
