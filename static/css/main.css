@@ -26,3 +26,15 @@ input[type="text"] {
     margin: 2px;
     font-size: 18px;
 }
+
+.message {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+input[readonly] {
+    background-color: #f0f0f0;
+    color: #000;
+}
